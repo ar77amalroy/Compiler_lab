@@ -5,8 +5,7 @@ int yylex();
 void yyerror(char *s);
 int hasID = 0;
 %}
-%union
-{
+%union{
     double val;
 }
 %token <val> DIGIT
