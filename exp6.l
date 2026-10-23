@@ -2,31 +2,22 @@
 #include "y.tab.h"
 #include <stdlib.h>
 %}
-
 %%
-
 [0-9]+(\.[0-9]+)?     {
                         yylval.val = atof(yytext);
                         return DIGIT;
                       }
-
 [a-zA-Z_][a-zA-Z0-9_]* {
                         return ID;
                       }
-
 \n                    {
                         return NL;
                       }
-
 [ \t]+                ;
-
 .                     {
                         return yytext[0];
                       }
-
 %%
-
-int yywrap()
-{
+int yywrap(){
     return 1;
 }
