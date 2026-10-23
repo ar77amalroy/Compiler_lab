@@ -61,16 +61,11 @@ exp:
           $$ = $1;
       }
     ;
-
 %%
-
-void yyerror(const char *s)
-{
+void yyerror(const char *s){
     printf("Not a number\n");
 }
-
-int main()
-{
+int main(){
     printf("Enter expression: ");
     yyparse();
     return 0;
