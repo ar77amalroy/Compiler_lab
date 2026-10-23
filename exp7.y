@@ -1,14 +1,10 @@
 %{
 #include <stdio.h>
-
 int yylex();
 void yyerror(const char *s);
 %}
-
 %token KEYWORD IDENTIFIER INVALID
-
 %%
-
 input:
       KEYWORD
         {
@@ -23,16 +19,12 @@ input:
             printf("Invalid Identifier\n");
         }
     ;
-
 %%
-
-int main()
-{
+int main(){
     printf("Enter input: ");
     yyparse();
     return 0;
 }
-
 void yyerror(const char *s)
 {
     printf("Invalid Identifier\n");
