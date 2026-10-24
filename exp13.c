@@ -39,47 +39,31 @@ void generateCode()
             i = -1;
         }
     }
-
-    for (i = 0; rhs[i] != '\0'; i++)
-    {
-        if (rhs[i] == '+' || rhs[i] == '-')
-        {
+    for (i = 0; rhs[i] != '\0'; i++){
+        if (rhs[i] == '+' || rhs[i] == '-') {
             op = rhs[i];
-
             j = i - 1;
             while (j >= 0 && rhs[j] == ' ')
                 j--;
-
             a = rhs[j];
-
             j = i + 1;
             while (rhs[j] == ' ')
                 j++;
-
             b = rhs[j];
-
             result = 'Z' - tempCount;
-
             printf("%c=%c%c%c\n", result, a, op, b);
-
             rhs[j] = result;
             rhs[i] = ' ';
             rhs[j - 1] = ' ';
-
             tempCount++;
             i = -1;
         }
     }
 }
-
-int main()
-{
+int main(){
     printf("Enter expression: ");
     scanf("%s", expr);
-
     printf("\nIntermediate Code:\n");
-
     generateCode();
-
     return 0;
 }
