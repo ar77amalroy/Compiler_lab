@@ -80,3 +80,57 @@ int main(){
     }
     return 0;
 }
+//or
+
+
+#include <stdio.h>
+#include <string.h>
+#define MAX 20
+struct T {
+    char from[20], sym[20], to[20];
+};
+int main() {
+    struct T tr[50];
+    char s[MAX][20], c[MAX][20], q[MAX][20];
+    int n, t = 0, i, j, k, f, r, count, found;
+    FILE *fp = fopen("exp9.dat", "r");
+    if (!fp) {
+        printf("Cannot open file\n");
+        return 1;
+    }
+    printf("Enter number of states: ");
+    scanf("%d", &n);
+    printf("Enter states: ");
+    for (i = 0; i < n; i++)
+        scanf("%s", s[i]);
+    while (t < 50 && fscanf(fp, "%s %s %s",
+           tr[t].from, tr[t].sym, tr[t].to) == 3)
+        t++;
+    fclose(fp);
+    for (i = 0; i < n; i++) {
+        f = r = 0;
+        count = 1;
+        strcpy(c[0], s[i]);
+        strcpy(q[r++], s[i]);
+        while (f < r) {
+            for (j = 0; j < t; j++)
+                if (!strcmp(tr[j].from, q[f]) &&
+                    !strcmp(tr[j].sym, "e")) {
+                    found = 0;
+                    for (k = 0; k < count; k++)
+                        if (!strcmp(c[k], tr[j].to))
+                            found = 1;
+                    if (!found && count < MAX) {
+                        strcpy(c[count++], tr[j].to);
+                        strcpy(q[r++], tr[j].to);
+                    }
+                }
+            f++;
+        }
+        printf("Epsilon closure of %s = { ", s[i]);
+        for (j = 0; j < count; j++)
+            printf("%s%s", c[j], j < count - 1 ? ", " : "");
+        printf(" }\n");
+    }
+    return 0;
+}
