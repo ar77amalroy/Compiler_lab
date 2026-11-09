@@ -36,16 +36,11 @@ void yyerror(const char *s)
 int yylex(void);
 void yyerror(const char *s);
 %}
-%token KEYWORD IDENTIFIER INVALID NL
+%token IDENTIFIER NL
 %%
-input:
-      KEYWORD NL
-        { printf("Invalid identifier since it is Keyword\n"); exit(0); }
-    | IDENTIFIER NL
-        { printf("Valid Identifier\n"); exit(0); }
-    | INVALID NL
-        { printf("Invalid Identifier\n"); exit(0); }
-    ;
+input : IDENTIFIER NL
+          { printf("Valid Identifier\n"); exit(0); }
+      ;
 %%
 int main() {
     printf("Enter input: ");
