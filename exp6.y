@@ -85,16 +85,12 @@ int yylex(void);
 void yyerror(char *s);
 int hasID = 0;
 %}
-
 %union { double val; }
-
 %token <val> DIGIT
 %token ID NL
 %type <val> exp
-
 %left '+' '-'
 %left '*' '/'
-
 %%
 stmt : ID '=' exp NL
          { printf("Valid Expression\n"); exit(0); }
@@ -105,7 +101,6 @@ stmt : ID '=' exp NL
            exit(0);
          }
      ;
-
 exp : exp '+' exp  { $$ = $1 + $3; }
     | exp '-' exp  { $$ = $1 - $3; }
     | exp '*' exp  { $$ = $1 * $3; }
@@ -120,10 +115,8 @@ exp : exp '+' exp  { $$ = $1 + $3; }
     | DIGIT        { $$ = $1; }
     | ID           { hasID = 1; $$ = 1; }
     ;
-
 %%
 void yyerror(char *s) { printf("Invalid Expression\n"); }
-
 int main() {
     printf("Enter an arithmetic expression: ");
     yyparse();
