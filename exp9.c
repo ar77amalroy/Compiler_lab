@@ -134,3 +134,39 @@ int main() {
     }
     return 0;
 }
+//or
+
+
+
+#include <stdio.h>
+#include <string.h> 
+int main(){
+    char states[20][20], current[20], from[20], input[20], to[20], closure[20][20];
+    int n, i, count, next, exists;
+    FILE *fp = fopen("input2.dat", "r");
+    if (fp == NULL){ printf("input2.dat not found!");  return 1; }
+    printf("Enter the no of states: ");
+    scanf("%d", &n);
+    printf("Enter the states: ");
+    for (i = 0; i < n; i++) scanf("%s", states[i]);
+    for (i = 0; i < n; i++){
+        count = 0, next=0; 
+        strcpy(closure[count++], states[i]);
+        while (next < count){
+            strcpy(current, closure[next++]);
+            rewind(fp);
+            while (fscanf(fp, "%s%s%s", from, input, to) == 3){
+                if (!strcmp(current, from) && !strcmp(input, "e")){
+                    exists = 0;
+                    for (int j = 0; j < count; j++) 
+                        if (!strcmp(closure[j], to)) exists = 1;
+                    if (!exists) strcpy(closure[count++], to);
+                }
+            }
+        }
+        printf("\nEpsilon closure of %s = {", states[i]);            // {
+        for (int j = 0; j < count; j++) printf(" %s", closure[j]);      //  E-closures
+        printf(" }");                                                  // }
+    }
+    fclose(fp); printf("\n"); return 0;
+}
