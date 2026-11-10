@@ -138,8 +138,6 @@ int main() {
     reduce("*/", 0, strlen(rhs) - 1);
     reduce("+-", 0, strlen(rhs) - 1);
     if (p) {
-        q = rhs;
-        while (*q == ' ') q++;
         printf("%c=%c\n", expr[0], *q);
     }
     return 0;
