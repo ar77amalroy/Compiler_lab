@@ -52,10 +52,8 @@ int main(){
 int main() {
     char op, a[100], b[100], c[100];
     const char *instruction;
-
     FILE *in = fopen("input.txt", "r"), *out = fopen("output.txt", "w");
     if (!in || !out) { printf("File error!\n"); return 1; }
-
     while (fscanf(in, " %c %s %s %s", &op, a, b, c) == 4) {
         switch (op) {
             case '+': instruction = "ADD"; break;
