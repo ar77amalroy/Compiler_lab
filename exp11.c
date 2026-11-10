@@ -74,12 +74,10 @@ int main(){
     printf("$\t\t%s$\t\t--\n", temp);
     while(in[pos]){
         st[++top] = in[pos++];
-
         if(st[top] == 'i')
             show("SHIFT -> id");
         else
             show("SHIFT");
-
         while(reduce())
             ;
     }
